@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  backend:
+    container_name: pm2-backend
+    build: .
+    env_file:
+      - .env
+    command: /scripts/containers/backend.prod.sh
+    privileged: true
+    networks:
+      - internal
+    ports:
+      - ${BACKEND_PORT}:4000
+    restart: always
+    volumes:
+      - ./configs:/configs
+      - ./scripts:/scripts
+  frontend:
+    container_name: pm2-frontend
+    build: .
+    env_file:
+      - .env
+    command: /scripts/containers/frontend.prod.sh
+    privileged: true
+    networks:
+      - internal
+    ports:
+      - ${FRONTEND_PORT}:5173
+    volumes:
+      - ./configs:/configs
+      - ./scripts:/scripts
+    restart: always
+
+networks:
+  internal:
