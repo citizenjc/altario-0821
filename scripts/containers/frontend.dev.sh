@@ -4,4 +4,5 @@ echo "STARTING CONTAINER"
 
 cd /app
 
-pm2-runtime start yarn --interpreter bash --name "frontend" --watch -- start
+yarn install
+pm2-runtime start /configs/ecosystem.config.js --only frontend-dev 

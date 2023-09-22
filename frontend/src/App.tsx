@@ -1,16 +1,16 @@
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 
 export default function App() {
-  return (     
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="generator" element={<Generator />} />
-          <Route path="payment" element={<Payment />} />
-     
-          <Route path="*" element={<NoMatch />} />
-        </Route>
-      </Routes>
+  return (
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="generator" element={<Generator />} />
+        <Route path="payment" element={<Payment />} />
+
+        <Route path="*" element={<NoMatch />} />
+      </Route>
+    </Routes>
   );
 }
 
