@@ -6,9 +6,8 @@ export const Container = styled.div`
   padding: 0 1rem;
 `;
 
-export const Header = styled.header`
+export const Header = styled.h1`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 0;
 `;

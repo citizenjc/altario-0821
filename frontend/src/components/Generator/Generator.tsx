@@ -1,9 +1,9 @@
-import { Container } from "./Generator-styled";
+import { Container, Header } from "./Generator-styled";
 
 export const Generator = () => {
   return (
     <Container>
-      <h1>Generator</h1>
+      <Header>Generator</Header>
     </Container>
   );
 };
