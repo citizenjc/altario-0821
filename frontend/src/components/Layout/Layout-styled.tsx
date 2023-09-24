@@ -8,8 +8,6 @@ export const Container = styled.div`
 `;
 
 export const Navbar = styled.nav`
-  background-color: #333;
-  color: white;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -17,15 +15,17 @@ export const Navbar = styled.nav`
 
   a {
     text-decoration: none;
-    color: white;
     margin-right: 20px;
-    font-weight: bold;
 
     &:last-child {
       margin-right: 0;
     }
 
     &:hover {
+      text-decoration: underline;
+    }
+
+    &.active {
       text-decoration: underline;
     }
   }
