@@ -55,10 +55,13 @@ export const Button = styled.button`
 
 export const Label = styled.label`
   text-transform: uppercase;
+  margin-bottom: 0.5rem;
 `;
 
 export const Input = styled.input`
-  padding: 10px;
+  padding: 0.5rem;
+  margin-right: 2rem;
+  width: 10rem;
 `;
 
 export const VerticalContainer = styled.div`

@@ -11,18 +11,28 @@ import {
   VerticalContainer,
   CodeBox,
 } from "./Generator-styled";
+import { useGlobalState } from "../../GlobalState";
 
 const columns = 10;
 const rows = 10;
 
 export const Generator = () => {
-  const [grid, setGrid] = useState<string[][]>([]);
-  const [code, setCode] = useState<string>("**");
-  const [isGeneratorRunning, setIsGeneratorRunning] = useState<boolean>(false);
-  const [canType, setCanType] = useState<boolean>(true);
-  const [char, setChar] = useState<string>("");
+  const {
+    code,
+    setCode,
+    char,
+    setChar,
+    grid,
+    setGrid,
+    isGeneratorRunning,
+    setIsGeneratorRunning,
+    canType,
+    setCanType,
+    genInterval,
+    setGenInterval,
+  } = useGlobalState();
 
-  const [genInterval, setGenInterval] = useState<number | undefined>(undefined);
+  const [charChanged, setCharChanged] = useState<boolean>(false);
 
   useEffect(() => {
     // on mount, draw the  grid with blank cells
@@ -30,15 +40,20 @@ export const Generator = () => {
       Array.from({ length: rows }, () => "")
     );
     setGrid(grid);
+    setCode(code);
+
+    return () => {
+      setCharChanged(false);
+    };
   }, []);
 
   useEffect(() => {
-    if (isGeneratorRunning) {
+    if (isGeneratorRunning && charChanged) {
       clearInterval(genInterval);
       const intervalId = setInterval(fetchData, 2000); // Fetch data every 2 seconds with the new 'char'
       setGenInterval(intervalId);
     }
-  }, [char, isGeneratorRunning]);
+  }, [charChanged, isGeneratorRunning]);
 
   const toggleGenerator = () => {
     if (isGeneratorRunning) {
@@ -61,27 +76,32 @@ export const Generator = () => {
       const data = await response.json();
       setGrid(data.grid);
       setCode(data.code);
+      setCode(data.code);
     } catch (error) {
       console.error("Error fetching grid data:", error);
     }
   };
 
-  const charValidator = (e: React.CompositionEvent<HTMLInputElement>) => {
-    const char = e.data;
+  const charValidator = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const char = e.currentTarget.value;
     //allow only alphabetic characters. allow only one character.
-    if (char.match(/^[a-zA-Z]+$/)) {
+    if (char.match(/^[a-zA-Z]+$/) || char === "") {
       e.currentTarget.value = char;
       setChar(char);
+      setCharChanged(true);
 
       setCanType(false);
       setTimeout(() => {
         setCanType(true);
+        setCharChanged(false);
       }, 4000);
+    } else {
+      e.currentTarget.value = "";
     }
   };
 
   return (
-    <Container className="flex max-w">
+    <Container>
       <Header className="text-3xl">Generator</Header>
       <Header>
         <VerticalContainer>
@@ -91,8 +111,9 @@ export const Generator = () => {
           <Input
             className="border rounded border-gray-400"
             placeholder="Character"
+            defaultValue={char}
             disabled={!canType}
-            onBeforeInput={charValidator}
+            onChange={charValidator}
             maxLength={1}
           />
         </VerticalContainer>
