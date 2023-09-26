@@ -1,14 +1,14 @@
 // Layout.tsx
 import { Navbar } from "./Layout-styled";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet, Link } from "react-router-dom";
 
 export const Layout = () => {
   return (
     <div>
-      <Navbar>
-        <Link to="/">Home</Link>
-        <Link to="/generator">Generator</Link>
-        <Link to="/payment">Payment</Link>
+      <Navbar className="bg-slate-800 text-cyan-50 mb-8">
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/generator">Generator</NavLink>
+        <NavLink to="/payment">Payment</NavLink>
       </Navbar>
 
       <Outlet />

@@ -4,4 +4,4 @@ cd /app
 
 yarn install
 yarn build
-pm2 serve dist --name frontend --no-daemon --spa --port 5173
+pm2-runtime start /configs/ecosystem.config.js --only frontend-prod
