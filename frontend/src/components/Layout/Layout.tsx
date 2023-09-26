@@ -1,6 +1,6 @@
 // Layout.tsx
 import { Navbar } from "./Layout-styled";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, Link } from "react-router-dom";
 
 export const Layout = () => {
   return (

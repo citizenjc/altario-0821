@@ -10,6 +10,7 @@ import {
   Input,
   VerticalContainer,
   CodeBox,
+  LiveStatus,
 } from "./Generator-styled";
 import { useGlobalState } from "../../GlobalState";
 
@@ -139,8 +140,16 @@ export const Generator = () => {
           </div>
         ))}
       </GridContainer>
+      <div className="flex items-baseline">
+        <LiveStatus
+          className={`text-sm font-extrabold mr-2 ${
+            isGeneratorRunning ? "bg-red-600" : "bg-transparent"
+          }`}
+        />
+        {isGeneratorRunning ? "LIVE" : "NOT LIVE"}
+      </div>
       <CodeBox className="border rounded border-gray-400">
-        YOUR CODE: <strong>{code}</strong>
+        YOUR CODE: <strong className="ml-2">{code || "**"}</strong>
       </CodeBox>
     </Container>
   );

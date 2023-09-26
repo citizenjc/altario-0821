@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { indexRouter } from "./routes/Index";
 import bodyParser from "body-parser";
+import { connect } from "./db/MongoSetup";
 
 dotenv.config();
 
@@ -26,3 +27,6 @@ app.use("/", indexRouter);
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
+
+//connect to mongodb
+connect();

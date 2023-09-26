@@ -75,3 +75,10 @@ export const CodeBox = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const LiveStatus = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid black;
+`;

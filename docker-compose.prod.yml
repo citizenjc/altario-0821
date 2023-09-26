@@ -35,6 +35,21 @@ services:
       - ./configs:/configs
       - ./scripts:/scripts
     restart: always
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    env_file:
+      - .env
+    networks:
+      - internal
+    ports:
+      - ${MONGODB_PORT}:27017
+    restart: always
+    volumes:
+      - mongodb-data:/data/db
 
 networks:
   internal:
+
+volumes:
+  mongodb-data:
